@@ -1,0 +1,4 @@
+allowFunctionsRecompile = 1;
+
+#include "CfgArsenal.hpp"
+#include "CfgFunctions.hpp"
