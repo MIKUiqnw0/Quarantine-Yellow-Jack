@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1025;
+	toggles=1537;
 	class ItemIDProvider
 	{
-		nextID=438;
+		nextID=495;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=4;
+		nextID=5;
 	};
 	class Camera
 	{
-		pos[]={8879.6748,240.15332,11842.017};
-		dir[]={0.16996786,-0.6320101,0.75624698};
-		up[]={0.13863045,0.77478969,0.61681253};
-		aside[]={0.9757604,1.7183484e-006,-0.21930225};
+		pos[]={6990.0566,280.39603,9692.001};
+		dir[]={0.6313026,-0.53138185,0.56498104};
+		up[]={0.39598513,0.8471154,0.35438585};
+		aside[]={0.66691697,-2.9359944e-007,-0.74519974};
 	};
 };
 binarizationWanted=0;
@@ -47,13 +47,14 @@ addons[]=
 	"ace_respawn",
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Modules_F",
-	"A3_Structures_F_Walls"
+	"A3_Structures_F_Walls",
+	"Ryanzombies"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=16;
+		items=17;
 		class Item0
 		{
 			className="A3_Modules_F_Curator";
@@ -163,6 +164,12 @@ class AddonsMetaData
 			name="Arma 3 - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item16
+		{
+			className="Ryanzombies";
+			name="Ryanzombies";
+			author="Ryan";
 		};
 	};
 };
@@ -300,7 +307,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=15;
+		items=18;
 		class Item0
 		{
 			dataType="Logic";
@@ -907,9 +914,8 @@ class Mission
 					class Attributes
 					{
 						rank="COLONEL";
-						init="call{if(!isServer) exitWith { false }; " \n "waitUntil { alive p1 };" \n "_cur = allCurators select 0;" \n "p1 assignCurator _cur;}";
 						name="p1";
-						isPlayer=1;
+						isPlayable=1;
 						class Inventory
 						{
 							class handgun
@@ -1800,11 +1806,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={14527.674,0.047803283,220.49469};
+				position[]={14527.674,0.047332764,220.495};
 			};
 			id=333;
 			type="RyanZM_ModuleSettings";
-			atlOffset=64.634491;
+			atlOffset=64.634003;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2746,6 +2752,607 @@ class Mission
 			id=429;
 			type="Land_Mil_WiredFence_Gate_F";
 			atlOffset=0.26005554;
+		};
+		class Item15
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14546.766,0,240.64636};
+			};
+			id=455;
+			type="RyanZM_ModulePlayerZombies";
+			atlOffset=63.205856;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="RyanZM_ModulePlayerZombies_AttackDistance";
+					expression="_this setVariable ['AttackDistance',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2.3499999;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="RyanZM_ModulePlayerZombies_AttackSpeed";
+					expression="_this setVariable ['AttackSpeed',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.80000001;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="RyanZM_ModulePlayerZombies_Jumping";
+					expression="_this setVariable ['Jumping',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="RyanZM_ModulePlayerZombies_KnockbackAir";
+					expression="_this setVariable ['KnockbackAir',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				class Attribute4
+				{
+					property="RyanZM_ModulePlayerZombies_DamageCar";
+					expression="_this setVariable ['DamageCar',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.02;
+						};
+					};
+				};
+				class Attribute5
+				{
+					property="RyanZM_ModulePlayerZombies_Knockback";
+					expression="_this setVariable ['Knockback',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=1.5;
+						};
+					};
+				};
+				class Attribute6
+				{
+					property="RyanZM_ModulePlayerZombies_DamageAir";
+					expression="_this setVariable ['DamageAir',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.0099999998;
+						};
+					};
+				};
+				class Attribute7
+				{
+					property="RyanZM_ModulePlayerZombies_Damage";
+					expression="_this setVariable ['Damage',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.15000001;
+						};
+					};
+				};
+				class Attribute8
+				{
+					property="RyanZM_ModulePlayerZombies_PPeffects";
+					expression="_this setVariable ['PPeffects',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				class Attribute9
+				{
+					property="RyanZM_ModulePlayerZombies_DamageTank";
+					expression="_this setVariable ['DamageTank',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.0020000001;
+						};
+					};
+				};
+				class Attribute10
+				{
+					property="RyanZM_ModulePlayerZombies_KnockbackTank";
+					expression="_this setVariable ['KnockbackTank',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0.40000001;
+						};
+					};
+				};
+				class Attribute11
+				{
+					property="RyanZM_ModulePlayerZombies_KnockbackCar";
+					expression="_this setVariable ['KnockbackCar',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=1.5;
+						};
+					};
+				};
+				nAttributes=12;
+			};
+		};
+		class Item16
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14527.692,0,202.90649};
+			};
+			id=456;
+			type="RyanZM_ModuleAbilities";
+			atlOffset=64.962364;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="RyanZM_ModuleAbilities_Throwing";
+					expression="_this setVariable ['Throwing',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=3;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="RyanZM_ModuleAbilities_ThrowingTankDistance";
+					expression="_this setVariable ['ThrowingTankDistance',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=50;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="RyanZM_ModuleAbilities_ThrowingTankDistanceDemons";
+					expression="_this setVariable ['ThrowingTankDistanceDemons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=100;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="RyanZM_ModuleAbilities_Roaming";
+					expression="_this setVariable ['Roaming',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				class Attribute4
+				{
+					property="RyanZM_ModuleAbilities_Jumping";
+					expression="_this setVariable ['Jumping',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				class Attribute5
+				{
+					property="RyanZM_ModuleAbilities_Feeding";
+					expression="_this setVariable ['Feeding',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=3;
+						};
+					};
+				};
+				class Attribute6
+				{
+					property="RyanZM_ModuleAbilities_ThrowingCarAlarms";
+					expression="_this setVariable ['ThrowingCarAlarms',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				class Attribute7
+				{
+					property="RyanZM_ModuleAbilities_JumpingDemons";
+					expression="_this setVariable ['JumpingDemons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				class Attribute8
+				{
+					property="RyanZM_ModuleAbilities_ThrowingTank";
+					expression="_this setVariable ['ThrowingTank',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=5;
+						};
+					};
+				};
+				class Attribute9
+				{
+					property="RyanZM_ModuleAbilities_ThrowingDistance";
+					expression="_this setVariable ['ThrowingDistance',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=500;
+						};
+					};
+				};
+				class Attribute10
+				{
+					property="RyanZM_ModuleAbilities_ThrowingDemons";
+					expression="_this setVariable ['ThrowingDemons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				class Attribute11
+				{
+					property="RyanZM_ModuleAbilities_ThrowingDistanceDemons";
+					expression="_this setVariable ['ThrowingDistanceDemons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=1000;
+						};
+					};
+				};
+				class Attribute12
+				{
+					property="RyanZM_ModuleAbilities_ThrowingTankDemons";
+					expression="_this setVariable ['ThrowingTankDemons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				nAttributes=13;
+			};
+		};
+		class Item17
+		{
+			dataType="Group";
+			side="Independent";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={7037.9629,212.02943,9723.9766};
+						angles[]={0,3.2448463,0};
+					};
+					side="Independent";
+					flags=7;
+					class Attributes
+					{
+						init="call{if(!isServer) exitWith { false }; " \n "waitUntil { alive zue };" \n "_cur = allCurators select 0;" \n "zue assignCurator _cur;}";
+						name="zue";
+						description="Lucifer";
+						isPlayable=1;
+					};
+					id=482;
+					type="RyanZombiePlayer27";
+					atlOffset=0.00045776367;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="acex_headless_blacklist";
+							expression="_this setVariable [""acex_headless_blacklist"",_value,true]";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"BOOL"
+										};
+									};
+									value=0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male04GRE";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1;
+								};
+							};
+						};
+						nAttributes=3;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=481;
+			atlOffset=0.00045776367;
 		};
 	};
 };

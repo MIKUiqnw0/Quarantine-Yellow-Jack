@@ -29,6 +29,7 @@ _zombieTypes = [
 	]
 ];
 maximumGroups = 6;
+_zLoop = true;
 
 _fnRandomType = compileFinal "selectRandom _this";
 _fnRandomGroup = compileFinal "selectRandom _this";  // select (2 + round(random((count _randomType) - 3)))";
@@ -37,45 +38,47 @@ _fnZombieSpawn = compileFinal "[_this select 0, resistance, _this select 1] call
 
 if(zeDebug) then { systemChat "zeDebug (zSpawnRadial): Wilderness zombie spawner loop started" };
 
-while { count playableUnits > 0 } do {
+while { _zLoop } do {
 	sleep zeRespawnTimer;
-	if(count zeGroupArr < maximumGroups) then {
-		_randomPosition = call _fnRandomPosition;
-		_randomType = _zombieTypes call _fnRandomType;
-		_randomGroup = _randomType call _fnRandomGroup;
-		_spawnedGroup = [_randomPosition, _randomGroup] call _fnZombieSpawn;
-		_spawnedGroup deleteGroupWhenEmpty true;
-		(allCurators select 0) addCuratorEditableObjects [units _spawnedGroup, false];
-		zeGroupArr pushBack _spawnedGroup;
-		
-		if(zeDebug) then { systemChat format ["zeDebug (zSpawnRadial): Spawned Group @ %1, %2, %3", _randomPosition, _randomType, _randomGroup] };
-	} else {		
-		// NULL Check the group array and purge any null entries.
-		_hasNull = true;
-		while { _hasNull } do {
-			_hasNull = false;
-			{		
-				if(isNull _x) exitWith {
-					_hasNull = true;
-					zeGroupArr deleteAt _forEachIndex;
-					if(zeDebug) then { systemChat "zeDebug (zSpawnRadial): Deleted a null group from group array" };
-				};
-			} forEach zeGroupArr;
+	if( west countSide allPlayers > 0 ) then {
+		if(count zeGroupArr < maximumGroups) then {
+			_randomPosition = call _fnRandomPosition;
+			_randomType = _zombieTypes call _fnRandomType;
+			_randomGroup = _randomType call _fnRandomGroup;
+			_spawnedGroup = [_randomPosition, _randomGroup] call _fnZombieSpawn;
+			_spawnedGroup deleteGroupWhenEmpty true;
+			(allCurators select 0) addCuratorEditableObjects [units _spawnedGroup, false];
+			zeGroupArr pushBack _spawnedGroup;
+			
+			if(zeDebug) then { systemChat format ["zeDebug (zSpawnRadial): Spawned Group @ %1, %2, %3", _randomPosition, _randomType, _randomGroup] };
+		} else {		
+			// NULL Check the group array and purge any null entries.
+			_hasNull = true;
+			while { _hasNull } do {
+				_hasNull = false;
+				{		
+					if(isNull _x) exitWith {
+						_hasNull = true;
+						zeGroupArr deleteAt _forEachIndex;
+						if(zeDebug) then { systemChat "zeDebug (zSpawnRadial): Deleted a null group from group array" };
+					};
+				} forEach zeGroupArr;
+			};
+			
+			// Unit count check the group array and purge empty groups.
+			// Keep an eye out for sync issues.
+			_hasEmpty = true;
+			while { _hasEmpty } do {
+				_hasEmpty = false;
+				{
+					if(count units _x == 0) exitWith {
+						_hasEmpty = true;
+						zeGroupArr deleteAt _forEachIndex;
+						if(zeDebug) then { systemChat "zeDebug (zSpawnRadial): Deleted a empty group from group array" };
+						
+					};
+				} forEach zeGroupArr;
+			};
 		};
-		
-		// Unit count check the group array and purge empty groups.
-		// Keep an eye out for sync issues.
-		_hasEmpty = true;
-		while { _hasEmpty } do {
-			_hasEmpty = false;
-			{
-				if(count units _x == 0) exitWith {
-					_hasEmpty = true;
-					zeGroupArr deleteAt _forEachIndex;
-					if(zeDebug) then { systemChat "zeDebug (zSpawnRadial): Deleted a empty group from group array" };
-					
-				};
-			} forEach zeGroupArr;
-		}
 	};
 };

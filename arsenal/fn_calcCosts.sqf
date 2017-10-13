@@ -25,17 +25,65 @@
 	-------------------------------
 	H_ 			headgear
 	-------------------------------
+	
+	["headgear", "goggles", ["assignedItems"],
+	"uniform", ["uniformItems"], "vest",
+	["vestItems"], "backpack", ["backpackItems"],
+	["weapons"], ["primaryWeaponItems"], 
+	["secondaryWeaponItems"], ["handgunItems"]
 */
 
 params["_purchase", "_type", "_isArray"];
 
+_cost = 0;
 if(!_isArray) then {
 	switch(_type) do {
-		case "headgear": {
-			_result = _purchase find "H_Helmet";
-			
+		case "headgear";
+		case "goggles";
+		case "uniform";
+		case "vest": {
+			_index = listOfClassNames select 3 find _purchase;
+			_cost = getArray(missionConfigFile >> "CfgArsenal" >> "Items" >> "list") select _index select 1;
+		};
+		case "backpack": {
+			_index = listOfClassNames select 2 find _purchase;
+			_cost = getArray(missionConfigFile >> "CfgArsenal" >> "Backpacks" >> "list") select _index select 1;
 		};
 	};
-} else {
-	
 };
+
+if(_isArray) then {
+	switch(_type select 0) do {
+		case "assignedItems";
+		case "primaryWeaponItems";
+		case "secondaryWeaponItems";
+		case "handgunItems": {
+			{
+				_index = listOfClassNames select 3 find _x;
+				_cost = _cost + (getArray(missionConfigFile >> "CfgArsenal" >> "Items" >> "list") select _index select 1);
+			} forEach _purchase;
+		};
+		case "uniformItems";
+		case "vestItems";
+		case "backpackItems": {
+			_searchIn = [3,1,0]; // Search through items, then magazines and finally weapons categories in config
+			_ref = ["Items", "Magazines", "Weapons"];
+			{
+				_xPurchase = _x;
+				_index = { // Element 0 - Category in CfgArsenal, Element 1 - Index of item in that category
+					_i = listOfClassNames select _x find _xPurchase;
+					if(_i != -1) exitWith { [_x, _i] };
+				} forEach _searchIn;
+				
+				if(isNil _index && zeDebug) then {
+					systemChat format ["zeDebug (calcCosts): _index is nil. Item %1 could not be found in any category in CfgArsenal", _x];
+				} else {
+					_configRef = (getArray(missionConfigFile >> "CfgArsenal" >> (_ref select (_index select 0)) >> "list");
+					_cost = _cost + _configRef select (_index select 1) select 1);
+				};
+			} forEach _purchase;
+		};
+	};
+};
+
+_cost;

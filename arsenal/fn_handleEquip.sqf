@@ -21,11 +21,12 @@ for [{private _i = 0}, {_i < count _struct}, {_i = _i + 1}] do {
 	private _equipType = _struct select _i;
 	
 	if(typeName _equipType == "ARRAY") then {
+		
 		if(zeDebug) then { systemChat "zeDebug (handleEquip): Array Unmanaged." };
-		_ret = [_newSelect, _equipType, true] call ZE_fnc_calcCosts;
+		_cost = _cost + ([_newSelect, _equipType, true] call ZE_fnc_calcCosts);
 	} else {
 		if(_curSelect != _newSelect && _newSelect != "") then {
-			_ret = [_newSelect, _equipType, false] call ZE_fnc_calcCosts;
+			_cost = _cost + ([_newSelect, _equipType, false] call ZE_fnc_calcCosts);
 		};
 	};
 };
