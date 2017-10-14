@@ -53,6 +53,7 @@ if(!_isArray) then {
 };
 
 if(_isArray) then {
+	systemChat format ["Type: %1", _type select 0];
 	switch(_type select 0) do {
 		case "assignedItems";
 		case "primaryWeaponItems";
@@ -60,7 +61,9 @@ if(_isArray) then {
 		case "handgunItems": {
 			{
 				_index = listOfClassNames select 3 find _x;
-				_cost = _cost + (getArray(missionConfigFile >> "CfgArsenal" >> "Items" >> "list") select _index select 1);
+				_cfgCost = getArray(missionConfigFile >> "CfgArsenal" >> "Items" >> "list") select _index select 1;
+				systemChat format ["_cfgCost = %1", _cfgCost];
+				_cost = _cost + _cfgCost;
 			} forEach _purchase;
 		};
 		case "uniformItems";
@@ -72,18 +75,26 @@ if(_isArray) then {
 				_xPurchase = _x;
 				_index = { // Element 0 - Category in CfgArsenal, Element 1 - Index of item in that category
 					_i = listOfClassNames select _x find _xPurchase;
-					if(_i != -1) exitWith { [_x, _i] };
+					if(_i != -1) exitWith { [_forEachIndex , _i, _x] };
 				} forEach _searchIn;
-				
-				if(isNil _index && zeDebug) then {
-					systemChat format ["zeDebug (calcCosts): _index is nil. Item %1 could not be found in any category in CfgArsenal", _x];
+				if(isNil "_index" && zeDebug) then {
+					systemChat format ["zeDebug (calcCosts): _index is nil. Item %1 could not be found in CfgArsenal", _x];
 				} else {
-					_configRef = (getArray(missionConfigFile >> "CfgArsenal" >> (_ref select (_index select 0)) >> "list");
-					_cost = _cost + _configRef select (_index select 1) select 1);
+					_configRef = getArray(missionConfigFile >> "CfgArsenal" >> (_ref select (_index select 0)) >> "list");
+					_cost = _cost + (_configRef select (_index select 1) select 1);
 				};
+			} forEach _purchase;
+		};
+		case "weapons": {
+			{
+				_index = listOfClassNames select 0 find _x;
+				if(isNil "_index" && zeDebug) then {
+					systemChat format ["zeDebug (calcCosts): _index is nil. Item %1 could not be found in CfgArsenal >> 'Weapons'", _x];
+				} else {
+					_cost = _cost + (getArray(missionConfigFile >> "CfgArsenal" >> "Weapons" >> "list") select _index select 1);
+				}
 			} forEach _purchase;
 		};
 	};
 };
-
 _cost;

@@ -1,9 +1,7 @@
 if(!isDedicated && !isServer) exitWith { false };
 
 if(zeDebug) then { systemChat "zeDebug (initServer): Initializing serverside" };
-// Random Zombie Group Spawning
-zeGroupArr = [];
-zeRespawnTimer = 10;
+independent setFriend [civilian, 0];
 
 if(zeDebug) then { systemChat "zeDebug (initServer): Adding arsenal config to mission namespace" };
 listOfClassNames = [];

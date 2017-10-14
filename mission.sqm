@@ -8,7 +8,7 @@ class EditorData
 	toggles=1537;
 	class ItemIDProvider
 	{
-		nextID=495;
+		nextID=498;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=5;
+		nextID=7;
 	};
 	class Camera
 	{
-		pos[]={6990.0566,280.39603,9692.001};
-		dir[]={0.6313026,-0.53138185,0.56498104};
-		up[]={0.39598513,0.8471154,0.35438585};
-		aside[]={0.66691697,-2.9359944e-007,-0.74519974};
+		pos[]={8933.2744,241.43237,11897.847};
+		dir[]={-0.24951364,-0.46649146,-0.84860528};
+		up[]={-0.096783713,0.88394499,-0.45746383};
+		aside[]={-0.96352345,0.032012418,0.26570463};
 	};
 };
 binarizationWanted=0;
@@ -307,7 +307,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=18;
+		items=20;
 		class Item0
 		{
 			dataType="Logic";
@@ -467,11 +467,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={14783.856,0.5914588,398.72681};
+				position[]={14783.856,0.59117126,398.72699};
 			};
 			id=47;
 			type="ACE_moduleMedicalSettings";
-			atlOffset=66.898285;
+			atlOffset=66.898003;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -584,7 +584,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=0;
+							value=2;
 						};
 					};
 				};
@@ -789,7 +789,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=1;
+							value=2;
 						};
 					};
 				};
@@ -2102,11 +2102,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={14527.331,0.036258698,280.17899};
+				position[]={14527.269,0,277.51923};
 			};
 			id=392;
 			type="RyanZM_ModuleZombieDeletion";
-			atlOffset=58.634995;
+			atlOffset=58.573647;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2250,11 +2250,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={14527.383,0.88137674,240.56213};
+				position[]={14527.383,0.88121796,240.562};
 			};
 			id=405;
 			type="RyanZM_ModuleInfected";
-			atlOffset=63.003151;
+			atlOffset=63.002998;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2329,7 +2329,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=50;
+							value=90;
 						};
 					};
 				};
@@ -2379,11 +2379,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={14526.802,-0.68460745,260.62775};
+				position[]={14527.269,0,259.34418};
 			};
 			id=406;
 			type="RyanZM_ModuleInfection";
-			atlOffset=59.487003;
+			atlOffset=60.416195;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2420,7 +2420,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=30;
+							value=15;
 						};
 					};
 				};
@@ -2439,7 +2439,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=1;
+							value=2;
 						};
 					};
 				};
@@ -2758,11 +2758,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={14546.766,0,240.64636};
+				position[]={14546.766,0.00011062622,240.646};
 			};
 			id=455;
 			type="RyanZM_ModulePlayerZombies";
-			atlOffset=63.205856;
+			atlOffset=63.206001;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2932,7 +2932,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=1;
+							value=0;
 						};
 					};
 				};
@@ -3001,11 +3001,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={14527.692,0,202.90649};
+				position[]={14527.692,-0.00036621094,202.90601};
 			};
 			id=456;
 			type="RyanZM_ModuleAbilities";
-			atlOffset=64.962364;
+			atlOffset=64.961998;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -3353,6 +3353,105 @@ class Mission
 			};
 			id=481;
 			atlOffset=0.00045776367;
+		};
+		class Item18
+		{
+			dataType="Marker";
+			position[]={7037.9673,0,9723.915};
+			name="respawn_guerrila";
+			type="respawn_unknown";
+			angle=90.001968;
+			id=495;
+			atlOffset=-211.58;
+		};
+		class Item19
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={7035.9702,204.64392,9757.6787};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+					};
+					id=497;
+					type="B_Survivor_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="acex_headless_blacklist";
+							expression="_this setVariable [""acex_headless_blacklist"",_value,true]";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"BOOL"
+										};
+									};
+									value=0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male09ENG";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1.05;
+								};
+							};
+						};
+						nAttributes=3;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=496;
 		};
 	};
 };

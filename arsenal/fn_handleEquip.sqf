@@ -21,9 +21,11 @@ for [{private _i = 0}, {_i < count _struct}, {_i = _i + 1}] do {
 	private _equipType = _struct select _i;
 	
 	if(typeName _equipType == "ARRAY") then {
-		
-		if(zeDebug) then { systemChat "zeDebug (handleEquip): Array Unmanaged." };
-		_cost = _cost + ([_newSelect, _equipType, true] call ZE_fnc_calcCosts);
+		_filtered = [_curSelect, _newSelect] call ZE_fnc_inventoryFilter;
+		systemChat format ["Filter of %1:%2", _equipType select 0, str _filtered];
+		if(count _filtered != 0) then {
+			_cost = _cost + ([_filtered, _equipType, true] call ZE_fnc_calcCosts);
+		}
 	} else {
 		if(_curSelect != _newSelect && _newSelect != "") then {
 			_cost = _cost + ([_newSelect, _equipType, false] call ZE_fnc_calcCosts);
@@ -33,4 +35,4 @@ for [{private _i = 0}, {_i < count _struct}, {_i = _i + 1}] do {
 
 if(zeDebug) then { systemChat format ["zeDebug (handleEquip): Final cost for new equipment is $%1", _cost] };
 if(zeDebug) then { systemChat "zeDebug (handleEquip): Restoring old equipment. TODO: Failed / cancelled purchase"};
-[_curEquips] call ZE_fnc_resetEquip;
+//[_curEquips] call ZE_fnc_resetEquip;

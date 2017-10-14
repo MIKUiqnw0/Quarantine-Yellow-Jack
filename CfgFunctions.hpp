@@ -5,6 +5,7 @@ class CfgFunctions {
 			class calcCosts {};
 			class currentEquip {};
 			class handleEquip {};
+			class inventoryFilter {};
 			class resetEquip {};
 		};
 		class initialization {
