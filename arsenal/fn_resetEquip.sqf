@@ -1,5 +1,5 @@
 _struct = true call ZE_fnc_currentEquip;
-params[["_equip", [], [[]], count _struct]];
+params["_equip"];
 
 if(count _equip == count _struct) then { 
 	removeHeadgear player;
@@ -24,6 +24,4 @@ if(count _equip == count _struct) then {
 	{ player addSecondaryWeaponItem _x } forEach (_equip select 11);
 	{ player addHandgunItem _x } forEach (_equip select 12);
 	if(zeDebug) then { systemChat "zeDebug (resetEquip): Equipment restored" };
-} else {
-	systemChat "zeError (resetEquip): Fed array of equipment was not the correct size, could not process.";
 };

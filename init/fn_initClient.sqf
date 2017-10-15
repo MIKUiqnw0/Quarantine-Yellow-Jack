@@ -1,6 +1,6 @@
 if(isDedicated) exitWith { false };
 
-zeMoney = 5000;
+if(isNil { profileNamespace getVariable "zeMoney" }) then { profileNamespace setVariable ["zeMoney", 1000] };
 
 ["Preload"] call BIS_fnc_arsenal;
 

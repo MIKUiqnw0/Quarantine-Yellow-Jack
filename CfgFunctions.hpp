@@ -7,23 +7,25 @@ class CfgFunctions {
 			class handleEquip {};
 			class inventoryFilter {};
 			class resetEquip {};
+			class shopDialog {};
 		};
 		class initialization {
 			file = "init";
-			class initServer {};
 			class initClient {};
 			class initLocations {};
+			class initServer {};
 		};
 		class map {
 			file = "map";
-			class mapSetup {};
 			class getAllLocations {};
+			class mapSetup {};
 		};
 		class persistance {
 			file = "persist";
 		};
 		class server {
 			file = "server";
+			class moneyDrop {};
 			class zSpawnRadial {};
 		};
 	};

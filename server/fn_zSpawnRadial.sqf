@@ -65,7 +65,7 @@ while { !zeKill } do {
 				(allCurators select 0) addCuratorEditableObjects [units _spawnedGroup, false];
 				zeGroupArr pushBack _spawnedGroup;
 				
-				if(zeDebug) then { systemChat format ["zeDebug (zSpawnRadial): Spawned Group @ %1, %2, %3", _randomPosition, _randomType, _randomGroup] };
+				if(zeDebug) then { systemChat format ["zeDebug (zSpawnRadial): Spawned Group @ %1, %2", _randomPosition, _randomGroup] };
 			} else {		
 				// NULL Check the group array and purge any null entries.
 				_hasNull = true;

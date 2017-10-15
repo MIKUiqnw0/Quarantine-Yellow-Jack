@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=7;
+		nextID=12;
 	};
 	class Camera
 	{
-		pos[]={8933.2744,241.43237,11897.847};
-		dir[]={-0.24951364,-0.46649146,-0.84860528};
-		up[]={-0.096783713,0.88394499,-0.45746383};
-		aside[]={-0.96352345,0.032012418,0.26570463};
+		pos[]={8902.2832,198.49022,11872.447};
+		dir[]={-0.31503394,-0.56551665,0.7621972};
+		up[]={-0.29295728,0.82181644,0.4886654};
+		aside[]={0.90273458,0.069345027,0.42457229};
 	};
 };
 binarizationWanted=0;
@@ -827,6 +827,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="call{this addAction [""Purchase Equipment"", {[] call ZE_fnc_handleEquip} , nil, 1.5, true, true, """", ""player distance zearse < 5"", 5, false, """"];}";
 				name="zearse";
 			};
 			id=25;
@@ -887,7 +888,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],false]";
+							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],true]";
 						};
 					};
 				};

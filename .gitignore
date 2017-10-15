@@ -1,1 +1,2 @@
-*.tproj
+.vscode
+ignore.sqf

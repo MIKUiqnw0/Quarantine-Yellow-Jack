@@ -1,4 +1,6 @@
 allowFunctionsRecompile = 1;
 
+#include "defines.hpp"
+#include "dialogs.hpp"
 #include "CfgArsenal.hpp"
 #include "CfgFunctions.hpp"
