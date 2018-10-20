@@ -2,8 +2,8 @@ disableSerialization;
 
 params["_cash", "_cost"];
 
-createDialog "zeShopDialog";
+createDialog "zShopDialog";
 
-waitUntil { !isNull (uiNamespace getVariable "zeShopDialog") };
-_display = uiNamespace getVariable "zeShopDialog";
+waitUntil { !isNull (uiNamespace getVariable "zShopDialog") };
+_display = uiNamespace getVariable "zShopDialog";
 (_display displayCtrl 1004) ctrlSetText format ["Total: $%1", str _cost];

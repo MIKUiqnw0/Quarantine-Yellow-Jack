@@ -26,7 +26,8 @@ class CfgFunctions {
 		class server {
 			file = "server";
 			class moneyDrop {};
-			class zSpawnRadial {};
+			class moneyBalance {};
+			class zombieSpawnWilderness {};
 		};
 	};
 };

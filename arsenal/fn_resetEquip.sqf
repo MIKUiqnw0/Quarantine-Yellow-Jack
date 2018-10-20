@@ -23,5 +23,5 @@ if(count _equip == count _struct) then {
 	{ player addPrimaryWeaponItem _x } forEach (_equip select 10);
 	{ player addSecondaryWeaponItem _x } forEach (_equip select 11);
 	{ player addHandgunItem _x } forEach (_equip select 12);
-	if(zeDebug) then { systemChat "zeDebug (resetEquip): Equipment restored" };
+	if(zDebug) then { systemChat "zDebug (resetEquip): Equipment restored" };
 };

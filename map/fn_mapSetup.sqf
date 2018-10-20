@@ -1,6 +1,6 @@
 _locations = call ZE_fnc_getAllLocations;
 
-if(zeDebug) then { systemChat "zeDebug (mapSetup): Setting up map markers" };
+if(zDebug) then { systemChat "zDebug (mapSetup): Setting up map markers" };
 _locations spawn {
 	{
 		_radius = 100;
@@ -16,7 +16,7 @@ _locations spawn {
 		_markerRef setMarkerBrush "SOLID";
 		_markerRef setMarkerColor "ColorRed";
 		_markerRef setMarkerAlpha 0.35;
-		if(zeDebug) then { systemChat format ["zeDebug (mapSetup): Marker created @ %1 for %2 (%3)", position _x, text _x, str _x] };
+		if(zDebug) then { systemChat format ["zDebug (mapSetup): Marker created @ %1 for %2 (%3)", position _x, text _x, str _x] };
 		_triggerRef = createTrigger ["EmptyDetector", position _x, false];
 		_triggerRef setTriggerArea [_radius, _radius, 0, false];
 		_triggerRef setTriggerActivation ["ANYPLAYER", "PRESENT", true];
