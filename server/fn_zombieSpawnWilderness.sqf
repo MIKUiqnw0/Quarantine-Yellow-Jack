@@ -1,148 +1,73 @@
 if(!isDedicated && !isServer) exitWith { false };
 
-_zombieTypes = [
-	[
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "RyanzombiesgroupWalker" >> "RyanzombiesgroupWalker2"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "RyanzombiesgroupWalker" >> "RyanzombiesgroupWalker3"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "RyanzombiesgroupWalker" >> "RyanzombiesgroupWalker4"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "RyanzombiesgroupWalker" >> "RyanzombiesgroupWalker5")
-	],[
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "RyanzombiesgroupCrawler" >> "RyanzombiesgroupCrawler2"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "RyanzombiesgroupCrawler" >> "RyanzombiesgroupCrawler3")
-	],[
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupslow" >> "Ryanzombiesgroupslow2"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupslow" >> "Ryanzombiesgroupslow3"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupslow" >> "Ryanzombiesgroupslow4"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupslow" >> "Ryanzombiesgroupslow5")
-	],[
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupspider" >> "Ryanzombiesgroupspider2"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupspider" >> "Ryanzombiesgroupspider3")
-	],[
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupmedium" >> "Ryanzombiesgroupmedium2"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupmedium" >> "Ryanzombiesgroupmedium3"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupmedium" >> "Ryanzombiesgroupmedium4"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupmedium" >> "Ryanzombiesgroupmedium5")
-	],[
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupfast" >> "Ryanzombiesgroupfast3"),
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupfast" >> "Ryanzombiesgroupfast5")
-	],[
-		(configfile >> "CfgGroups" >> "Indep" >> "Ryanzombiesfaction" >> "Ryanzombiesgroupdemon" >> "Ryanzombiesgroupdemon3")
-	]
-];
-
-_zombieTypesOpfor = [
-		[
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "RyanzombiesgroupWalkeropfor" >> "RyanzombiesgroupWalker2opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "RyanzombiesgroupWalkeropfor" >> "RyanzombiesgroupWalker3opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "RyanzombiesgroupWalkeropfor" >> "RyanzombiesgroupWalker4opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "RyanzombiesgroupWalkeropfor" >> "RyanzombiesgroupWalker5opfor")
-	],[
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "RyanzombiesgroupCrawleropfor" >> "RyanzombiesgroupCrawler2opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "RyanzombiesgroupCrawleropfor" >> "RyanzombiesgroupCrawler3opfor")
-	],[
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupslowopfor" >> "Ryanzombiesgroupslow2opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupslowopfor" >> "Ryanzombiesgroupslow3opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupslowopfor" >> "Ryanzombiesgroupslow4opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupslowopfor" >> "Ryanzombiesgroupslow5opfor")
-	],[
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupspideropfor" >> "Ryanzombiesgroupspider2opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupspideropfor" >> "Ryanzombiesgroupspider3opfor")
-	],[
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupmediumopfor" >> "Ryanzombiesgroupmedium2opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupmediumopfor" >> "Ryanzombiesgroupmedium3opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupmediumopfor" >> "Ryanzombiesgroupmedium4opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupmediumopfor" >> "Ryanzombiesgroupmedium5opfor")
-	],[
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupfastopfor" >> "Ryanzombiesgroupfast3opfor"),
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupfastopfor" >> "Ryanzombiesgroupfast5opfor")
-	],[
-		(configfile >> "CfgGroups" >> "East" >> "Ryanzombiesfactionopfor" >> "Ryanzombiesgroupdemonopfor" >> "Ryanzombiesgroupdemon3opfor")
-	]
-];
-
-zGroupArr = [];
-zMaxGroups = 6;
-zLoop = true;
-zTimer = 60;
+_activeZombies = [];
+zMaxZombies = 60;
+_activeSpawn = false;
+_timer = 3;
 zKill = false;
+_threatLevel = 0;
+zSpawnSide = independent;
 
-/*
-_numTotal = 0;
-_numArr = [];
-for "_i" from 1 to 20 do {
-  _num = floor(random 3) + 1;
-  _numTotal = _numTotal + _num;
-  _numArr pushback _num;
+_fnSafezoneCheck = {			
+	if(zSurvivorsInSafezones != 0) then {
+		_threatLevel = 1 - (zSurvivorsInSafezones / count (playableUnits - [lucifer]));
+	} else {
+		_threatLevel = 1;
+	};
 };
-*/
-
-_fnRandomType = compileFinal "selectRandom _this";
-_fnRandomGroup = compileFinal "selectRandom _this";  // select (2 + round(random((count _randomType) - 3)))";
-_fnRandomPosition = compileFinal "(selectRandom playableUnits) getPos [1000 * sqrt random 1, random 360]";
-_fnZombieSpawn = compileFinal "[_this select 0, resistance, _this select 1] call BIS_fnc_spawnGroup";
 
 if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Wild zombie spawner loop started" };
 
 while { !zKill } do {
-	sleep zTimer;
-	if ( west countSide allPlayers > 0 ) then { 
-		zTimer = 10;
-		zLoop = true;
+	sleep _timer;
+	call _fnSafezoneCheck;
+	if(count (playableUnits - [lucifer]) > 0 && _threatLevel > 0) then {
+		_timer = 3;
+		_activeSpawn = true;
 	};
-	
-	while { zLoop } do {
-		sleep zTimer;
-		if( west countSide allPlayers == 0 || zKill ) then { 
-			zLoop = false;
-			zTimer = 60;
-		} else {				
-			if(count zGroupArr < zMaxGroups) then {
-				_randomPosition = call _fnRandomPosition;
-				_randomType = _zombieTypes call _fnRandomType;
-				_randomGroup = _randomType call _fnRandomGroup;
-				_spawnedGroup = [_randomPosition, _randomGroup] call _fnZombieSpawn;
-				_spawnedGroup deleteGroupWhenEmpty true;
-				(allCurators select 0) addCuratorEditableObjects [units _spawnedGroup, false];
-				zGroupArr pushBack _spawnedGroup;
-				
-				if(zDebug) then { systemChat format ["zDebug (zombieSpawnWilderness): Spawned Group @ %1, %2", _randomPosition, _randomGroup] };
-			} else {		
-				// NULL Check the group array and purge any null entries.
+
+	while { _activeSpawn } do {
+		sleep _timer;
+		call _fnSafezoneCheck;
+
+		if(count (playableUnits - [lucifer]) == 0 || zKill || _threatLevel == 0) then { 
+			_activeSpawn = false;
+			_timer = 60;
+		} else {
+			if(count _activeZombies < zMaxZombies) then {
+    			_rndPosition = [selectRandom (playableUnits - [lucifer]), 50, 600, 0, 0, 0, 0, [], []] call BIS_fnc_findSafePos;
+				_zombieList = (if(zSpawnSide == independent) then { zList } else { zListOpfor });
+				_group = createGroup zSpawnSide;
+				_groupAmount = 1; // floor(random 3) + 1;
+				for "_i" from 1 to _groupAmount do {
+					_zombieType = _zombieList selectRandomWeighted [0.03, 0.1, 0.4, 0.2, 0.5, 0.8, 0.9]; // Demons, Fast, Walker, Medium, Slow, Spiders, Crawlers
+					_zombieClass = selectRandom (_zombieType#1);
+					_unit = _group createUnit [_zombieClass, _rndPosition, [], 20, "NONE"];
+					_activeZombies pushBack _unit;
+				};
+				_group deleteGroupWhenEmpty true;
+				{ _x addCuratorEditableObjects [units _group, false] } forEach allCurators;
+				if(zDebug) then { systemChat format ["zDebug (zombieSpawnWilderness): Spawned group with %1 unit @ %2, %3", _groupAmount, _rndPosition, _group] };
+			} else {
 				_hasNull = true;
 				while { _hasNull } do {
 					_hasNull = false;
 					{		
 						if(isNull _x) exitWith {
 							_hasNull = true;
-							zGroupArr deleteAt _forEachIndex;
-							if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Deleted a null group from group array" };
+							_activeZombies deleteAt _forEachIndex;
+							if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Deleted a null unit from active zombie array" };
 						};
-					} forEach zGroupArr;
-				};
-				
-				// Unit count check the group array and purge empty groups.
-				// Keep an eye out for sync issues.
-				_hasEmpty = true;
-				while { _hasEmpty } do {
-					_hasEmpty = false;
-					{
-						if(count units _x == 0) exitWith {
-							_hasEmpty = true;
-							zGroupArr deleteAt _forEachIndex;
-							if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Deleted a empty group from group array" };
-						};
-					} forEach zGroupArr;
+					} forEach _activeZombies;
 				};
 			};
 		};
 	};
 };
 
-// Cleanup
-zGroupArr = nil; 
-zMaxGroups = nil;
-zLoop = nil;
-zTimer = nil;
+// Cleanup if killed
+zMaxZombies = nil;
 zKill = nil;
+zSpawnSide = nil;
 
-if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Script Terminated" };
+if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Spawning script terminated" };

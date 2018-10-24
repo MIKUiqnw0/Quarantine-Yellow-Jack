@@ -2,7 +2,8 @@ if(isDedicated) exitWith { false };
 
 if(zDebug) then { systemChat "zDebug (handleEquip): Reading current equipment and profile" };
 _curEquips = call ZE_fnc_currentEquip;
-_cash = profileNamespace getVariable "zeMoney";
+[getPlayerUID player] remoteExecCall ["ZE_fnc_moneyBalance", 2];
+_cash = zMoney;
 _transactionDone = false;
 
 ["Open", false] call BIS_fnc_arsenal;
@@ -67,4 +68,3 @@ while { !_transactionDone } do {
 		};
 	};
 };
-
