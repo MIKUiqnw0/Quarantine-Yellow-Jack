@@ -6,7 +6,6 @@ _activeSpawn = false;
 _timer = 3;
 zKill = false;
 _threatLevel = 0;
-zSpawnSide = independent;
 
 _fnSafezoneCheck = {			
 	if(zSurvivorsInSafezones != 0) then {
@@ -36,13 +35,15 @@ while { !zKill } do {
 		} else {
 			if(count _activeZombies < zMaxZombies) then {
     			_rndPosition = [selectRandom (playableUnits - [lucifer]), 50, 600, 0, 0, 0, 0, [], []] call BIS_fnc_findSafePos;
-				_zombieList = (if(zSpawnSide == independent) then { zList } else { zListOpfor });
-				_group = createGroup zSpawnSide;
+				_zombieList = (if(zSideJIP == independent) then { zListOpfor } else { zList });
+				_group = createGroup (if(zSideJIP == independent) then { east } else { independent });
 				_groupAmount = 1; // floor(random 3) + 1;
 				for "_i" from 1 to _groupAmount do {
 					_zombieType = _zombieList selectRandomWeighted [0.03, 0.1, 0.4, 0.2, 0.5, 0.8, 0.9]; // Demons, Fast, Walker, Medium, Slow, Spiders, Crawlers
 					_zombieClass = selectRandom (_zombieType#1);
 					_unit = _group createUnit [_zombieClass, _rndPosition, [], 20, "NONE"];
+					[_unit, typeOf _unit == "ryanszombiesboss1", 650, 10] spawn ZE_fnc_zombieDeletion;
+					_unit addEventHandler ["Killed", { [_this#0, _this#1] call ZE_fnc_moneyDrop }];
 					_activeZombies pushBack _unit;
 				};
 				_group deleteGroupWhenEmpty true;

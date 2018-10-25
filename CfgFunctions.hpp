@@ -30,6 +30,7 @@ class CfgFunctions {
 			class moneyDeduct {};
 			class setSide {};
 			class zombieSpawnWilderness {};
+			class zombieDeletion {};
 		};
 	};
 };

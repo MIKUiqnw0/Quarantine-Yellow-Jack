@@ -20,8 +20,6 @@ switch (_side) do {
 		indepBaseUnits apply { [_x] joinSilent (createGroup independent) };
 		indepBaseUnits = nil;
 		zSideJIP = independent;
-		ryanzombiesdeletion = 0.3; // 0.9 = None 0.7 = Blufor 0.5 = Redfor 0.3 = Indep 0.1 = Civ
-		ryanzombiesdeletiondemons = 0.3;
 	};
 	case east: { 
 		_layers#0 call _fncDelete;
@@ -30,8 +28,6 @@ switch (_side) do {
 		ruskieBaseUnits apply { [_x] joinSilent (createGroup east) };
 		ruskieBaseUnits = nil;
 		zSideJIP = east;
-		ryanzombiesdeletion = 0.5;
-		ryanzombiesdeletiondemons = 0.5;
 	};
 	case west: { 
 		_layers#0 call _fncDelete;

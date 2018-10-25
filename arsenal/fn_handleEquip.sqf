@@ -3,7 +3,6 @@ if(isDedicated) exitWith { false };
 if(zDebug) then { systemChat "zDebug (handleEquip): Reading current equipment and profile" };
 _curEquips = call ZE_fnc_currentEquip;
 [getPlayerUID player] remoteExecCall ["ZE_fnc_moneyBalance", 2];
-_cash = zMoney;
 _transactionDone = false;
 
 ["Open", false] call BIS_fnc_arsenal;
@@ -48,20 +47,20 @@ while { !_transactionDone } do {
 		_curEquips call ZE_fnc_resetEquip;
 		_transactionDone = true;
 	} else {
-		if(_cost > _cash) then {
+		if(_cost > zMoney) then {
 			if(zDebug) then { systemChat format ["zDebug (handleEquip): Not enough money ($%1), returning to arsenal...", _cash] };
 			["Open", false] call BIS_fnc_arsenal;
 		} else {
 			purchaseCancel = false;
-			[_cash, _cost] call ZE_fnc_shopDialog;
+			[zMoney, _cost] call ZE_fnc_shopDialog;
 			waitUntil { !dialog };
 			if (purchaseCancel) then {
 				if(zDebug) then { systemChat "zDebug (handleEquip): Purchase cancelled, returning to arsenal..."};
 				["Open", false] call BIS_fnc_arsenal;
 			} else {
-				_cash = _cash - _cost;
-				profileNamespace setVariable ["zeMoney", _cash];
-				if(zDebug) then { systemChat format ["zDebug (handleEquip): $%1 deducted from profile, now $%2", _cost, _cash] };
+				//_cash = _cash - _cost;
+				[getPlayerUID player, _cost] remoteExecCall ["ZE_fnc_moneyDeduct", 2];
+				if(zDebug) then { systemChat format ["zDebug (handleEquip): $%1 deducted from profile, now $%2", _cost, zMoney] };
 				_transactionDone = true;
 				if(zDebug) then { systemChat "zDebug (handleEquip): Transaction Completed" };
 			};

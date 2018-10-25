@@ -1,14 +1,9 @@
 if(!isDedicated && !isServer) exitWith { false };
 
 if(zDebug) then { systemChat "zDebug (initServer): Initializing server side" };
-independent setFriend [civilian, 0];
 zSideJIP = nil;
 publicVariable "zSideJIP";
 if(isNil {profileNamespace getVariable "zBank"}) then { profileNamespace setVariable ["zBank", []] };
-
-RZ_fnc_zombie_onDeath_exec = {
-	
-};
 
 if(zDebug) then { systemChat "zDebug (initServer): Adding arsenal config to mission namespace" };
 listOfClassNames = [];
@@ -54,13 +49,13 @@ zList pushBack ["Medium", [_zList, "ryanzombiesmedium"] call _fnFetchZombieClass
 zList pushBack ["Walkers", [_zList, "ryanzombieswalker"] call _fnFetchZombieClassNames];
 zList pushBack ["Slow", [_zList, "ryanzombiesslow"] call _fnFetchZombieClassNames];
 
-zListOpfor pushBack ["Demons", [_zList, "ryanzombiesboss"] call _fnFetchZombieClassNames];
-zListOpfor pushBack ["Spiders", [_zList, "ryanzombiesSpider"] call _fnFetchZombieClassNames];
-zListOpfor pushBack ["Crawlers", [_zList, "ryanzombiesCrawler"] call _fnFetchZombieClassNames];
-zListOpfor pushBack ["Fast", [_zList, "ryanzombiesfast"] call _fnFetchZombieClassNames];
-zListOpfor pushBack ["Medium", [_zList, "ryanzombiesmedium"] call _fnFetchZombieClassNames];
-zListOpfor pushBack ["Walkers", [_zList, "ryanzombieswalker"] call _fnFetchZombieClassNames];
-zListOpfor pushBack ["Slow", [_zList, "ryanzombiesslow"] call _fnFetchZombieClassNames];
+zListOpfor pushBack ["Demons", [_zListOpfor, "ryanzombiesboss"] call _fnFetchZombieClassNames];
+zListOpfor pushBack ["Spiders", [_zListOpfor, "ryanzombiesSpider"] call _fnFetchZombieClassNames];
+zListOpfor pushBack ["Crawlers", [_zListOpfor, "ryanzombiesCrawler"] call _fnFetchZombieClassNames];
+zListOpfor pushBack ["Fast", [_zListOpfor, "ryanzombiesfast"] call _fnFetchZombieClassNames];
+zListOpfor pushBack ["Medium", [_zListOpfor, "ryanzombiesmedium"] call _fnFetchZombieClassNames];
+zListOpfor pushBack ["Walkers", [_zListOpfor, "ryanzombieswalker"] call _fnFetchZombieClassNames];
+zListOpfor pushBack ["Slow", [_zListOpfor, "ryanzombiesslow"] call _fnFetchZombieClassNames];
 
 if(zDebug) then { systemChat "zDebug (initServer): Waiting for preload end" };
 _handle = addMissionEventHandler ["PreloadFinished", {

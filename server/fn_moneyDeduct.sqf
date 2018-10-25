@@ -11,7 +11,7 @@ if(_account == -1) exitWith {
 	if(zDebug) then { systemChat format ["zDebug (moneyDeduct): Failed to find client:%1 | SteamID:%2 account in bank", remoteExecutedOwner, _callerSteam] };
 };
 
-_bank#_account set [1, _account#1 - _amount];
+_bank#_account set [1, _bank#_account#1 - _amount];
 zMoney = _bank#_account#1;
 remoteExecutedOwner publicVariableClient "zMoney";
-[format ["Account Balance\n\nDeducted %1 from your account.\nYou now have $%1 under your name.", zMoney]] remoteExec ["hint", remoteExecutedOwner];
+[format ["Account Balance\n\nDeducted %1 from your account.\nYou now have $%2 under your name.", _amount, zMoney]] remoteExec ["hint", remoteExecutedOwner];
