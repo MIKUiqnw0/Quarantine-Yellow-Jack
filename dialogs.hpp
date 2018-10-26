@@ -1,3 +1,14 @@
+class ZArsenal {
+	idd = 30001;
+	movingEnable = false;
+	enableSimulation = 0;
+	controlsBackground[] = { };
+	objects[] = { };
+	//onLoad = "";
+	//onUnload = "";
+	//onKeyDown = "";
+};
+
 class ZShopDialog {
     idd = 30000;                   // set to -1, if don't require a unique ID
     movingEnable = 0;           // the dialog can be moved with the mouse
