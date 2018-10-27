@@ -1,4 +1,4 @@
-if(!isServer && !isDedicated) exitWith { false };
+if(!isDedicated && !isServer) exitWith { false };
 
 params["_callerSteam", "_amount"];
 if(zDebug) then { systemChat format ["zDebug (moneyDeduct): Client:%1 | SteamID:%2 is deducting %3 from their balance", remoteExecutedOwner, _callerSteam, _amount] };

@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=931;
+		nextID=932;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=52;
+		nextID=55;
 	};
 	class Camera
 	{
-		pos[]={2699.3865,9.7393484,2131.7739};
-		dir[]={0.24303859,-0.57272917,0.78290075};
-		up[]={0.16980188,0.81974018,0.54698318};
-		aside[]={0.95504892,-1.7456478e-007,-0.29647881};
+		pos[]={5577.2188,1063.076,9118.6602};
+		dir[]={0.25190231,-0.54321325,0.80094934};
+		up[]={0.16297507,0.83958977,0.51819628};
+		aside[]={0.95396078,-3.1781383e-007,-0.30002204};
 	};
 };
 binarizationWanted=0;
@@ -3360,11 +3360,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={2568.5181,8.4843903,1701.0886};
+				position[]={2568.5181,8.4841366,1701.089};
 			};
 			id=405;
 			type="RyanZM_ModuleInfected";
-			atlOffset=11.997258;
+			atlOffset=11.997;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -3439,7 +3439,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=90;
+							value=50;
 						};
 					};
 				};
@@ -5408,7 +5408,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3700.9238,402.39795,6008.126};
+								position[]={3700.9241,402.39844,6008.126};
 								angles[]={0,1.8533826,0};
 							};
 							side="Independent";
@@ -5416,7 +5416,7 @@ class Mission
 							class Attributes
 							{
 								skill=1;
-								init="call{this addAction [""Join Chernarus National Guard / PMC"", {[INDEPENDENT, _this#0, _this#2] remoteExec [""ZE_fnc_setSide"", 2] }, nil, 1.5, true, true, """", ""player distance VIPIndep < 5"", 5, false, """"];" \n "[this,""LEAN_ON_TABLE"", ""ASIS"", pointer] call BIS_fnc_ambientAnim; }";
+								init="call{[this,""LEAN_ON_TABLE"", ""ASIS"", pointer] call BIS_fnc_ambientAnim; }";
 								name="VIPIndep";
 								class Inventory
 								{
@@ -5448,6 +5448,7 @@ class Mission
 							};
 							id=515;
 							type="LOP_PMC_Infantry_VIP";
+							atlOffset=0.00048828125;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -5553,6 +5554,7 @@ class Mission
 					{
 					};
 					id=753;
+					atlOffset=0.00048828125;
 				};
 				class Item19
 				{
@@ -6394,7 +6396,6 @@ class Mission
 							{
 								skill=1;
 								rank="COLONEL";
-								init="call{this addAction [""Join Russia"", { [EAST, _this#0, _this#2] remoteExec [""ZE_fnc_setSide"", 2] }, nil, 1.5, true, true, """", ""player distance VIPRuskie < 5"", 5, false, """"];}";
 								name="VIPRuskie";
 							};
 							id=655;
@@ -7613,7 +7614,6 @@ class Mission
 							class Attributes
 							{
 								skill=1;
-								init="call{this addAction [""Join NATO"", { [WEST, _this#0, _this#2] remoteExec [""ZE_fnc_setSide"", 2] }, nil, 1.5, true, true, """", ""player distance VIPMerica < 5"", 5, false, """"];}";
 								name="VIPMerica";
 							};
 							id=724;

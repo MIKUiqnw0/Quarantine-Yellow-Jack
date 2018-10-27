@@ -1,5 +1,6 @@
 if(!isDedicated && !isServer) exitWith { false };
 params ["_unit", "_killer"];
+if(!(_killer in playableUnits)) exitWith { false };
 
 _randMoney = round(random 100);
 _callerSteam = getPlayerUID _killer;

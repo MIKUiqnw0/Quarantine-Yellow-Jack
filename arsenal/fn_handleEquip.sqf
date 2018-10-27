@@ -58,9 +58,8 @@ while { !_transactionDone } do {
 				if(zDebug) then { systemChat "zDebug (handleEquip): Purchase cancelled, returning to arsenal..."};
 				["Open", false] call BIS_fnc_arsenal;
 			} else {
-				//_cash = _cash - _cost;
 				[getPlayerUID player, _cost] remoteExecCall ["ZE_fnc_moneyDeduct", 2];
-				if(zDebug) then { systemChat format ["zDebug (handleEquip): $%1 deducted from profile, now $%2", _cost, zMoney] };
+				if(zDebug) then { systemChat format ["zDebug (handleEquip): $%1 deducted from profile, now $%2", _cost, zMoney - _cost] }; // Check for consistency
 				_transactionDone = true;
 				if(zDebug) then { systemChat "zDebug (handleEquip): Transaction Completed" };
 			};
