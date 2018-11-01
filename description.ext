@@ -2,5 +2,7 @@ allowFunctionsRecompile = 1;
 
 #include "defines.hpp"
 #include "dialogs.hpp"
+#include "CfgRemoteExec.hpp"
+#include "CfgParams.hpp"
 #include "CfgArsenal.hpp"
 #include "CfgFunctions.hpp"

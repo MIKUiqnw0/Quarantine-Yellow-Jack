@@ -1,13 +1,16 @@
 if(!isDedicated && !isServer) exitWith { false };
 
-_activeZombies = [];
+zActiveZombies = [];
 zMaxZombies = 60;
 _activeSpawn = false;
-_timer = 3;
-zKill = false;
+zRefreshTimer = 1;
+zIdleTimer = 60;
+zAccTimer = zRefreshTimer;
+zKillSpawn = false;
+zSpawnWeights = [0.03, 0.1, 0.4, 0.2, 0.5, 0.8, 0.9]; // Demons, Fast, Walker, Medium, Slow, Spiders, Crawlers
 _threatLevel = 0;
 
-_fnSafezoneCheck = {			
+_fncSafezoneCheck = {
 	if(zSurvivorsInSafezones != 0) then {
 		_threatLevel = 1 - (zSurvivorsInSafezones / count (playableUnits - [lucifer]));
 	} else {
@@ -17,24 +20,24 @@ _fnSafezoneCheck = {
 
 if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Wild zombie spawner loop started" };
 
-while { !zKill } do {
-	sleep _timer;
-	call _fnSafezoneCheck;
+while { !zKillSpawn } do {
+	sleep zAccTimer;
+	call _fncSafezoneCheck;
 	if(count (playableUnits - [lucifer]) > 0 && _threatLevel > 0) then {
-		_timer = 3;
+		zAccTimer = zRefreshTimer;
 		_activeSpawn = true;
 	};
 
 	while { _activeSpawn } do {
-		sleep _timer;
-		call _fnSafezoneCheck;
+		sleep zAccTimer;
+		call _fncSafezoneCheck;
 
-		if(count (playableUnits - [lucifer]) == 0 || zKill || _threatLevel == 0) then { 
+		if(count (playableUnits - [lucifer]) == 0 || zKillSpawn || _threatLevel == 0) then {
 			_activeSpawn = false;
-			_timer = 60;
+			zAccTimer = zIdleTimer;
 		} else {
-			if(count _activeZombies < zMaxZombies) then {
-    			_rndPosition = [selectRandom (playableUnits - [lucifer]), 50, 600, 0, 0, 0, 0, [], []] call BIS_fnc_findSafePos;
+			if(count zActiveZombies < zMaxZombies) then {
+    			_rndPosition = [selectRandom (playableUnits - [lucifer]), 25, 600, 0, 0, 0, 0, [], []] call BIS_fnc_findSafePos;
 				_zombieList = objNull;
 				_group = objNull;
 				if(!isNil "zSideJIP") then {
@@ -45,12 +48,12 @@ while { !zKill } do {
 					_group = createGroup independent;
 				};
 
-				_zombieType = _zombieList selectRandomWeighted [0.03, 0.1, 0.4, 0.2, 0.5, 0.8, 0.9]; // Demons, Fast, Walker, Medium, Slow, Spiders, Crawlers
+				_zombieType = _zombieList selectRandomWeighted zSpawnWeights;
 				_zombieClass = selectRandom (_zombieType#1);
 				_unit = _group createUnit [_zombieClass, _rndPosition, [], 20, "NONE"];
 				[_unit, typeOf _unit == "ryanszombiesboss1", 650, 10] spawn ZE_fnc_zombieDeletion;
 				_unit addEventHandler ["Killed", { [_this#0, _this#1] call ZE_fnc_moneyDrop }];
-				_activeZombies pushBack _unit;
+				zActiveZombies pushBack _unit;
 				_group deleteGroupWhenEmpty true;
 				{ _x addCuratorEditableObjects [units _group, false] } forEach allCurators;
 
@@ -60,13 +63,13 @@ while { !zKill } do {
 				_hasNull = true;
 				while { _hasNull } do {
 					_hasNull = false;
-					{		
+					{
 						if(isNull _x) exitWith {
 							_hasNull = true;
-							_activeZombies deleteAt _forEachIndex;
+							zActiveZombies deleteAt _forEachIndex;
 							if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Deleted a null unit from active zombie array" };
 						};
-					} forEach _activeZombies;
+					} forEach zActiveZombies;
 				};
 			};
 		};
@@ -75,7 +78,11 @@ while { !zKill } do {
 
 // Cleanup if killed
 zMaxZombies = nil;
-zKill = nil;
+zKillSpawn = nil;
 zSpawnSide = nil;
+zRefreshTimer = nil;
+zIdleTimer = nil;
+zAccTimer = nil;
+zSpawnWeights = nil;
 
 if(zDebug) then { systemChat "zDebug (zombieSpawnWilderness): Spawning script terminated" };

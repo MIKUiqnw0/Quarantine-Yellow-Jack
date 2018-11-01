@@ -25,12 +25,13 @@
 	-------------------------------
 	H_ 			headgear
 	-------------------------------
-	
+
 	["headgear", "goggles", ["assignedItems"],
 	"uniform", ["uniformItems"], "vest",
 	["vestItems"], "backpack", ["backpackItems"],
-	["weapons"], ["primaryWeaponItems"], 
-	["secondaryWeaponItems"], ["handgunItems"]
+	"primaryWeapon", "secondaryWeapon", "handgunWeapon",
+	"binocular", ["primaryWeaponItems"], ["secondaryWeaponItems"],
+	["handgunItems"]
 */
 
 params["_purchase", "_type", "_isArray"];
@@ -47,6 +48,17 @@ if(!_isArray) then {
 		case "backpack": {
 			_index = listOfClassNames select 2 find _purchase;
 			_endCost = getArray(missionConfigFile >> "CfgArsenal" >> "Backpacks" >> "list") select _index select 1;
+		};
+		case "primaryWeapon";
+		case "secondaryWeapon";
+		case "handgunWeapon";
+		case "binocular": {
+			_index = listOfClassNames select 0 find _purchase;
+			if(_index == -1 && zDebug) then {
+				systemChat format ["zDebug (calcCosts): _index is -1. Item %1 could not be found in CfgArsenal >> 'Weapons'", _purchase];
+			} else {
+				_endCost = _endCost + (getArray(missionConfigFile >> "CfgArsenal" >> "Weapons" >> "list") select _index select 1);
+			};
 		};
 	};
 };
@@ -70,7 +82,7 @@ if(_isArray) then {
 			{
 				_xPurchase = _x;
 				_index = {
-					_i = listOfClassNames select _x find _xPurchase;
+					private _i = listOfClassNames select _x find _xPurchase;
 					if(_i != -1) exitWith { [_forEachIndex , _i, _x] }; // [0] - matching index for _ref, [1] - item index in Cfg, [2] - debug index ref for category
 				} forEach _searchIn;
 				if(isNil "_index" && zDebug) then {
@@ -79,16 +91,6 @@ if(_isArray) then {
 					_configRef = getArray(missionConfigFile >> "CfgArsenal" >> (_ref select (_index select 0)) >> "list");
 					_endCost = _endCost + (_configRef select (_index select 1) select 1);
 				};
-			} forEach _purchase;
-		};
-		case "weapons": {
-			{
-				_index = listOfClassNames select 0 find _x;
-				if(isNil "_index" && zDebug) then {
-					systemChat format ["zDebug (calcCosts): _index is nil. Item %1 could not be found in CfgArsenal >> 'Weapons'", _x];
-				} else {
-					_endCost = _endCost + (getArray(missionConfigFile >> "CfgArsenal" >> "Weapons" >> "list") select _index select 1);
-				}
 			} forEach _purchase;
 		};
 	};

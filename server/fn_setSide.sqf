@@ -35,7 +35,7 @@ switch (_side) do {
 		indepBaseUnits = nil;
 		zSideJIP = independent;
 	};
-	case east: { 
+	case east: {
 		[_layers#0] call _fncDelete;
 		[_layers#2] call _fncDelete;
 		playableUnits - [lucifer] joinSilent (createGroup east);
@@ -43,7 +43,7 @@ switch (_side) do {
 		ruskieBaseUnits = nil;
 		zSideJIP = east;
 	};
-	case west: { 
+	case west: {
 		[_layers#0] call _fncDelete;
 		[_layers#1] call _fncDelete;
 		zSideJIP = west;

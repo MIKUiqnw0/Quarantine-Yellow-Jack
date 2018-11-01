@@ -1,14 +1,12 @@
 if(isDedicated) exitWith { false };
-params["_box"];
 
 if(zDebug) then { systemChat "zDebug (handleEquip): Reading current equipment and profile" };
-_curEquips = false call ZE_fnc_currentEquip;
+_curEquips = call ZE_fnc_currentEquip;
 [getPlayerUID player] remoteExecCall ["ZE_fnc_moneyBalance", 2];
 _transactionDone = false;
 
-[_box, player, true] call ace_arsenal_fnc_openBox;
+["Open", false] call BIS_fnc_arsenal;
 
-/*
 while { !_transactionDone } do {
 	_cost = 0;
 	if(zDebug) then { systemChat "zDebug (handleEquip): Waiting for arsenal display..."; };
@@ -24,7 +22,7 @@ while { !_transactionDone } do {
 		_curSelect = _curEquips select _i;
 		_newSelect = _newEquips select _i;
 		_equipType = _struct select _i;
-		
+
 		if(typeName _equipType == "ARRAY") then {
 			_filtered = [+_curSelect, +_newSelect] call ZE_fnc_inventoryFilter;
 			if(count _filtered != 0) then {
@@ -37,7 +35,7 @@ while { !_transactionDone } do {
 		};
 	};
 
-	if(isNil "_cost") exitWith { 
+	if(isNil "_cost") exitWith {
 		systemChat "_cost borked, reset";
 		_curEquips call ZE_fnc_resetEquip;
 	};
@@ -50,7 +48,7 @@ while { !_transactionDone } do {
 		_transactionDone = true;
 	} else {
 		if(_cost > zMoney) then {
-			if(zDebug) then { systemChat format ["zDebug (handleEquip): Not enough money ($%1), returning to arsenal...", _cash] };
+			if(zDebug) then { systemChat format ["zDebug (handleEquip): Not enough money ($%1), returning to arsenal...", zMoney] };
 			["Open", false] call BIS_fnc_arsenal;
 		} else {
 			purchaseCancel = false;
@@ -60,12 +58,11 @@ while { !_transactionDone } do {
 				if(zDebug) then { systemChat "zDebug (handleEquip): Purchase cancelled, returning to arsenal..."};
 				["Open", false] call BIS_fnc_arsenal;
 			} else {
-				//_cash = _cash - _cost;
 				[getPlayerUID player, _cost] remoteExecCall ["ZE_fnc_moneyDeduct", 2];
-				if(zDebug) then { systemChat format ["zDebug (handleEquip): $%1 deducted from profile, now $%2", _cost, zMoney] };
+				if(zDebug) then { systemChat format ["zDebug (handleEquip): $%1 deducted from profile, now $%2", _cost, zMoney - _cost] }; // Check for consistency
 				_transactionDone = true;
 				if(zDebug) then { systemChat "zDebug (handleEquip): Transaction Completed" };
 			};
 		};
 	};
-};*/
+};
